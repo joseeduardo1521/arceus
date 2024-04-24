@@ -20,6 +20,7 @@ def obtener_general():
 # Definir una ruta y una función para manejar esa ruta
 @app.route('/')
 def hello():
+    obtener_general()
     return render_template('index.html')
 
 
