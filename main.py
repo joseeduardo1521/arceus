@@ -27,11 +27,11 @@ def liss():
     return lj
 
 # Función para verificar las credenciales de inicio de sesión
-def verificar_credenciales(usuario, contraseña):
-    usuarios = liss()  # Obtener los usuarios y contraseñas de la base de datos
+def verificar_credenciales(usuario, contra):
+    usuarios = liss()  # Obtener los usuarios y contras de la base de datos
     # Convertir el usuario a entero
     usuario = int(usuario)
-    if usuarios[(usuarios['id'] == usuario) & (usuarios['login'] == contraseña)].shape[0] > 0:
+    if usuarios[(usuarios['id'] == usuario) & (usuarios['login'] == contra)].shape[0] > 0:
         print("Credenciales válidas")
         return True
     print("Credenciales inválidas")
@@ -42,8 +42,8 @@ def login():
     if request.method == 'POST':
         print(request.form)  # Imprimir los datos del formulario para verificar si 'id' está presente
         usuario = request.form.get('id')  # Utilizar get() para evitar KeyError
-        contraseña = request.form.get('login')  # Utilizar get() para evitar KeyError
-        if verificar_credenciales(usuario, contraseña):
+        contra = request.form.get('login')  # Utilizar get() para evitar KeyError
+        if verificar_credenciales(usuario, contra):
             session['usuario'] = usuario
             return redirect(url_for('mostrar_grafico'))  # Redirigir a la página de tickets
         else:
